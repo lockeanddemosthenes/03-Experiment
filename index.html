@@ -8,6 +8,27 @@
   <h1> Experiment </h1>
 </body>
 
+
+<form onsubmit="return submitGuess()"> 
+ <!-- Form to submit guess -->
+ <p>What percent of the larger is the smaller?</p>
+
+ <input type="text" id="box">
+ <input type="submit" value="Submit Guess">
+
+</form>
+
 <script>
   console.log(d3); // test if d3 is loaded
+
+  var guessList = []; // The list of user guess
+
+  // Submit guess function, add guess to list
+  function submitGuess() {
+    guess = document.getElementById('box').value;
+    guessList.push(guess); // add guess  to list 
+    console.log(guessList); // console log sanity
+    return false; // dont reload form
+  }
+
 </script>
