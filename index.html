@@ -1,22 +1,24 @@
-<script src="https://d3js.org/d3.v4.min.js"></script>
-
-
-<style>
-</style>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+</head>
 
 <body>
-  <h1> Experiment </h1>
+  <h1>Experiment</h1>
+
+    <!-- SO 47078563 -->
+    <form onsubmit="return submitGuess()">
+     <!-- Form to submit guess -->
+     <p>What percent of the larger is the smaller?</p>
+
+     <input type="text" id="box">
+     <input type="submit" value="Submit Guess">
+
+    </form>
+
 </body>
-
-<!-- SO 47078563 -->
-<form onsubmit="return submitGuess()"> 
- <!-- Form to submit guess -->
- <p>What percent of the larger is the smaller?</p>
-
- <input type="text" id="box">
- <input type="submit" value="Submit Guess">
-
-</form>
 
 <script>
   console.log(d3); // test if d3 is loaded
@@ -26,7 +28,7 @@
   // Submit guess function, add guess to list
   function submitGuess() {
     guess = document.getElementById('box').value;
-    guessList.push(guess); // add guess  to list 
+    guessList.push(guess); // add guess  to list
     console.log(guessList); // console log sanity
     return false; // dont reload form
   }
