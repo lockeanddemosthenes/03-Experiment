@@ -33,8 +33,9 @@
     function submitGuess() {
       guess = document.getElementById("box").value;
       guessList.push(guess); // add guess  to list
-      console.log(guessList); // console log sanity
       document.getElementById("box").value = ""; //clear the input box
+      sessionStorage.setItem("guessList", guessList);
+      console.log(sessionStorage.getItem("guessList")); // console log sanity
       return false; // dont reload form
     }
 
