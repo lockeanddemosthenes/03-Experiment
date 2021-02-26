@@ -7,7 +7,6 @@
 
   <body>
     <h1>Experiment</h1>
-
     <div id="button">
       <!-- SO 47078563 -->
       <form onsubmit="return submitGuess()">
@@ -16,6 +15,7 @@
 
         <input type="text" id="box" />
         <input type="submit" value="Submit Guess" />
+        <button onclick="download_csv()">Download CSV</button>
       </form>
     </div>
   </body>
@@ -31,6 +31,22 @@
       guessList.push(guess); // add guess  to list
       console.log(guessList); // console log sanity
       return false; // dont reload form
+    }
+
+    function download_csv() {
+      var csv = Array.prototype.join.call(guessList, ",\n");
+
+      filename = "guesses.csv";
+
+      if (!csv.match(/^data:text\/csv/i)) {
+        csv = "data:text/csv;charset=utf-8," + csv;
+      }
+      data = encodeURI(csv);
+
+      link = document.createElement("a");
+      link.setAttribute("href", data);
+      link.setAttribute("download", filename);
+      link.click();
     }
   </script>
 </html>
