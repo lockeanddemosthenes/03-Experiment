@@ -12,7 +12,9 @@
   </head>
   <body>
     <script type="text/javascript">
+      // We dont take kindly to magic numbers here
       const STROKE_WIDTH = 5;
+      const DIAMETER = 300;
 
       // Sample Input
       sampleVal = [30, 100, 50, 17, 59, 92];
@@ -35,20 +37,18 @@
         children: someData,
       };
 
-      // Constant circle diameter offset
-      var diameter = 300;
 
       // Pack the bubbles together nice and tidy
       var bubble = d3
         .pack(dataset)
-        .size([diameter, diameter])
+        .size([DIAMETER, DIAMETER])
         .padding(STROKE_WIDTH); // Offset by stroke width to not overlap and mess up data
 
       var svg = d3
         .select("body")
         .append("svg")
-        .attr("width", diameter)
-        .attr("height", diameter)
+        .attr("width", DIAMETER)
+        .attr("height", DIAMETER)
         .attr("class", "bubble");
 
       var nodes = d3.hierarchy(dataset).sum(function (d) {
@@ -81,7 +81,7 @@
           return d.data.selected ? "black" : "white"; // Check if it is a chosen one
         });
 
-      d3.select(self.frameElement).style("height", diameter + "px");
+      d3.select(self.frameElement).style("height", DIAMETER + "px");
     </script>
   </body>
 </html>
