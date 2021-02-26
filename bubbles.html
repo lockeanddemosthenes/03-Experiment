@@ -12,18 +12,22 @@
   </head>
   <body>
     <script type="text/javascript">
+      sampleVal = [30, 100, 50, 17, 59, 92];
+      sampleIndi = [1, 3];
+      
+
       dataset = {
         children: [
-          { Name: "Olives", Count: 100 },
-          { Name: "Tea", Count: 10 },
-          { Name: "Mashed Potatoes", Count: 50 },
-          { Name: "Boiled Potatoes", Count: 60 },
-          { Name: "Milk", Count: 30 },
-          { Name: "Chicken Salad", Count: 60 },
+          { Name: true, Value: 100 },
+          { Name: false, Value: 10 },
+          { Name: false, Value: 50 },
+          { Name: true, Value: 60 },
+          { Name: false, Value: 30 },
+          { Name: false, Value: 65 },
         ],
       };
 
-      var diameter = 600;
+      var diameter = 300;
       var color = d3.scaleOrdinal(d3.schemeCategory20);
 
       var bubble = d3.pack(dataset).size([diameter, diameter]).padding(1.5);
@@ -36,7 +40,8 @@
         .attr("class", "bubble");
 
       var nodes = d3.hierarchy(dataset).sum(function (d) {
-        return d.Count;
+        console.log(d.Name);
+        return d.Value;
       });
 
       var node = svg
@@ -53,7 +58,7 @@
         });
 
       node.append("title").text(function (d) {
-        return d.Name + ": " + d.Count;
+        return d.Name + ": " + d.Value;
       });
 
       node
@@ -61,35 +66,42 @@
         .attr("r", function (d) {
           return d.r;
         })
-        .style("fill", function (d, i) {
-          return color(i);
+        .attr("fill", function (d) {
+          console.log(d.r);
+          return d.Name ? "red" : "green";
         });
+      // .style("fill", function (d, i) {
+      //   return color(i);
+      // });
 
       node
         .append("text")
         .attr("dy", ".2em")
         .style("text-anchor", "middle")
-        .text(function (d) {
-          return d.data.Name.substring(0, d.r / 3);
+        // .text(function (d) {
+        //   return d.data.Name.substring(0, d.r / 3);
+        // })
+        .attr("fill", function (d) {
+          return "black";
         })
         .attr("font-family", "sans-serif")
         .attr("font-size", function (d) {
           return d.r / 5;
-        })
-        .attr("fill", "white");
+        });
+      // .attr("fill", "white");
 
-      node
-        .append("text")
-        .attr("dy", "1.3em")
-        .style("text-anchor", "middle")
-        .text(function (d) {
-          return d.data.Count;
-        })
-        .attr("font-family", "Gill Sans", "Gill Sans MT")
-        .attr("font-size", function (d) {
-          return d.r / 5;
-        })
-        .attr("fill", "white");
+      //   node
+      //     .append("text")
+      //     .attr("dy", "1.3em")
+      //     .style("text-anchor", "middle")
+      //     .text(function (d) {
+      //       return d.data.Value;
+      //     })
+      //     .attr("font-family", "Gill Sans", "Gill Sans MT")
+      //     .attr("font-size", function (d) {
+      //       return d.r / 5;
+      //     })
+      //     .attr("fill", "white");
 
       d3.select(self.frameElement).style("height", diameter + "px");
     </script>
