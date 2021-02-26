@@ -22,6 +22,9 @@
 
   <script>
     console.log(d3); // test if d3 is loaded
+	
+	//magic numbers begone
+	const NUM_DATAPOINTS = 6;
 
     var guessList = []; // The list of user guess
 
@@ -30,9 +33,11 @@
       guess = document.getElementById("box").value;
       guessList.push(guess); // add guess  to list
       console.log(guessList); // console log sanity
+	  document.getElementById('box').value = ''; //clear the input box
       return false; // dont reload form
     }
 
+	// Download the CSV file
     function download_csv() {
       var csv = Array.prototype.join.call(guessList, ",\n");
 
@@ -48,5 +53,29 @@
       link.setAttribute("download", filename);
       link.click();
     }
+	
+	//generate data
+  const NUM_DATAPOINTS = 6;
+  
+  function getRandomInt(max) {
+	return Math.floor(Math.random() * Math.floor(max));
+  }
+  
+  var datapoints = [];
+  var indexes = [];
+  
+  for (i = 0; i < NUM_DATAPOINTS; i++){
+	datapoints.push(getRandomInt(100) + 1);
+  }
+  
+  for (i = 0; i < 2; i++) {
+    indexes.push(getRandomInt(6));
+  }
+  
+  var ratio;
+  if (datapoints[indexes[0]] > datapoints[indexes[1]]){
+	ratio = (datapoints[indexes[1]] / datapoints[indexes[0]]) * 100;
+   } else ratio = (datapoints[indexes[0]] / datapoints[indexes[1]]) * 100;
+
   </script>
 </html>
