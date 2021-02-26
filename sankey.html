@@ -35,7 +35,7 @@
   // Map the data
   var someData = d3.range(sampleVal.length).map((i) => ({
     source: 0,
-    target: i+1,
+    target: i + 1, // THE INDEX --- THE INNNNDEEEXXXX
     value: sampleVal[i], // The actual value
     selected: sampleIndi.includes(i), // Is this index a good index?
   }));
@@ -63,19 +63,6 @@
     { node: 6, name: "node6" },
   ];
 
-  //setup links
-  var links = [
-    { source: 0, target: 1, value: 30 },
-    { source: 0, target: 2, value: 100 },
-    { source: 0, target: 3, value: 50 },
-    { source: 0, target: 4, value: 17 },
-    { source: 0, target: 5, value: 59 },
-    { source: 0, target: 6, value: 92 },
-  ];
-
-  console.log(links);
-  console.log(someData);
-
   // Constructs a new Sankey generator with the default settings.
   sankey.nodes(nodes).links(someData).layout(1);
 
@@ -88,7 +75,9 @@
     .append("path")
     .attr("class", "link")
     .attr("d", sankey.link())
-    .style("stroke-opacity", 0.2)
+    .style("stroke-opacity", function (d) {
+      return d.selected ? 0.5 : 0.3;
+    })
     .style("stroke-width", function (d) {
       return Math.max(1, d.dy);
     });
