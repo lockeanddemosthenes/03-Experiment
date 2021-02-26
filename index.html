@@ -19,20 +19,19 @@
 
     </form>
   </div>
-
 </body>
 
 <script>
-  console.log(d3); // test if d3 is loaded
+    console.log(d3); // test if d3 is loaded
 
-  var guessList = []; // The list of user guess
+    var guessList = []; // The list of user guess
 
-  // Submit guess function, add guess to list
-  function submitGuess() {
-    guess = document.getElementById('box').value;
-    guessList.push(guess); // add guess  to list
-    console.log(guessList); // console log sanity
-    return false; // dont reload form
-  }
+    // Submit guess function, add guess to list
+    function submitGuess() {
+        guess = document.getElementById('box').value;
+        guessList.push(guess); // add guess  to list
+        console.log(guessList); // console log sanity
+        return false; // dont reload form
+    }
 
 </script>
