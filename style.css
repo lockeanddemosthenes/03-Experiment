@@ -1,5 +1,5 @@
 body {
-    background-color: #DDDDDD;
+    background-color: #EEEEEE;
     font-size: 14px;
     font-family: 'verdana';
     font-weight: normal;
@@ -7,18 +7,24 @@ body {
 }
 
 h1 {
-    color: navy;
+    color: #15c4e8
 }
 
 input[type=submit] {
     padding: 10px 20px 10px 20px;
-    background-color: #47d1ed;
+    background-color: #15c4e8;
     border-radius: 5px;
 }
 
 input[type=text] {
     margin-bottom: 10px;
     padding: 10px 10px 10px 10px;
+}
+
+button {
+    padding: 10px 20px 10px 20px;
+    background-color: #15c4e8;
+    border-radius: 5px;
 }
 
 /******
