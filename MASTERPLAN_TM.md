@@ -14,7 +14,7 @@
 
 1. Silly PNG
 2. 3D
-3. Upsidedown sideways 
+3. Upsidedown sideways
 
 
 ## Data IN
@@ -26,3 +26,11 @@
 ## Stinky
 
 - Stinky
+
+## Smelly
+
+- Smelly
+
+## Skeleton
+
+- Skeleton

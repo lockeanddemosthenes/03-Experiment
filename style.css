@@ -9,3 +9,20 @@ body {
 h1 {
     color: navy;
 }
+
+input[type=submit] {
+    padding: 10px 20px 10px 20px;
+    background-color: #47d1ed;
+    border-radius: 5px;
+}
+
+input[type=text] {
+    margin-bottom: 10px;
+    padding: 10px 10px 10px 10px;
+}
+
+/******
+ * If you're looking here, can you at least look respectfully?
+ * ...
+ * Even if I'm bad at style sheets?
+******/
