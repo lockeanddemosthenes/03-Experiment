@@ -97,8 +97,31 @@
       sessionStorage.setItem("guess", theGuess);
     }
 
-    document.getElementById("chart").innerHTML =
-      "<object type='text/html' id='object-design' data ='bubbles.html'></object>";
+    function setPage(PAGE) {
+      sessionStorage.setItem("PAGE", PAGE);
+      console.log("Set to " + PAGE);
+      handlePage();
+    }
+
+    function handlePage() {
+      switch (sessionStorage.getItem("PAGE")) {
+        case "BUBBLE":
+          document.getElementById("chart").innerHTML =
+            "<object type='text/html' id='object-design' data ='bubbles.html'></object>";
+          break;
+        case "BAR":
+          document.getElementById("chart").innerHTML =
+            "<object type='text/html' id='object-design' data ='bargraph.html'></object>";
+          break;
+        case "SANKEY":
+          document.getElementById("chart").innerHTML =
+            "<object type='text/html' id='object-design' data ='sankey.html'></object>";
+          break;
+        default:
+          console.log("default handle");
+      }
+    }
+
     guessStore(42, 50);
     console.log(sessionStorage.getItem("guess"));
   </script>
