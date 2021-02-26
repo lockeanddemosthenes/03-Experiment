@@ -24,22 +24,25 @@
       passedVal = sampleVal;
       passedIndicies = sampleIndi;
 
+      // Map the data
       var someData = d3.range(passedVal.length).map((i) => ({
-        selected: passedIndicies.includes(i),
-        val: passedVal[i],
+        selected: passedIndicies.includes(i), // Is this index a good index?
+        val: passedVal[i], // The actual value
       }));
 
+      // Setup some children to take the blame of things not working
       var dataset = {
         children: someData,
       };
 
+      // Constant circle diameter offset
       var diameter = 300;
-      var color = d3.scaleOrdinal(d3.schemeCategory20);
 
+      // Pack the bubbles together nice and tidy
       var bubble = d3
         .pack(dataset)
         .size([diameter, diameter])
-        .padding(STROKE_WIDTH);
+        .padding(STROKE_WIDTH); // Offset by stroke width to not overlap and mess up data
 
       var svg = d3
         .select("body")
@@ -52,6 +55,7 @@
         return d.val;
       });
 
+      // Add all things with transforms
       var node = svg
         .selectAll(".node")
         .data(bubble(nodes).descendants())
@@ -65,6 +69,7 @@
           return "translate(" + d.x + "," + d.y + ")";
         });
 
+      // Append the bubbles
       node
         .append("circle")
         .attr("r", function (d) {
@@ -73,7 +78,7 @@
         .attr("stroke-width", STROKE_WIDTH)
         .attr("stroke", "black")
         .attr("fill", function (d) {
-          return d.data.selected ? "black" : "white";
+          return d.data.selected ? "black" : "white"; // Check if it is a chosen one
         });
 
       d3.select(self.frameElement).style("height", diameter + "px");
