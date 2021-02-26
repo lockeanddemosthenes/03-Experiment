@@ -83,6 +83,13 @@
       sessionStorage.setItem("someRatio", ratio);
       return ratio;
     }
+  </script>
+
+  <!-- State thing script -->
+  <script>
+    //Setup that JS global state machine
+    sessionStorage.setItem("PAGE", "TITLE");
+    console.log(sessionStorage.getItem("PAGE"));
 
     function guessStore(guess, actual) {
       theGuess = [guess, actual];
