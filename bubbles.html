@@ -36,7 +36,10 @@
       var diameter = 300;
       var color = d3.scaleOrdinal(d3.schemeCategory20);
 
-      var bubble = d3.pack(dataset).size([diameter, diameter]).padding(STROKE_WIDTH);
+      var bubble = d3
+        .pack(dataset)
+        .size([diameter, diameter])
+        .padding(STROKE_WIDTH);
 
       var svg = d3
         .select("body")
@@ -72,38 +75,6 @@
         .attr("fill", function (d) {
           return d.data.selected ? "black" : "white";
         });
-      // .style("fill", function (d, i) {
-      //   return color(i);
-      // });
-
-      node
-        .append("text")
-        .attr("dy", ".2em")
-        .style("text-anchor", "middle")
-        // .text(function (d) {
-        //   return d.data.selected.substring(0, d.r / 3);
-        // })
-        .attr("fill", function (d) {
-          return "black";
-        })
-        .attr("font-family", "sans-serif")
-        .attr("font-size", function (d) {
-          return d.r / 5;
-        });
-      // .attr("fill", "white");
-
-      //   node
-      //     .append("text")
-      //     .attr("dy", "1.3em")
-      //     .style("text-anchor", "middle")
-      //     .text(function (d) {
-      //       return d.data.val;
-      //     })
-      //     .attr("font-family", "Gill Sans", "Gill Sans MT")
-      //     .attr("font-size", function (d) {
-      //       return d.r / 5;
-      //     })
-      //     .attr("fill", "white");
 
       d3.select(self.frameElement).style("height", diameter + "px");
     </script>
