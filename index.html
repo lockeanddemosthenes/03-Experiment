@@ -53,29 +53,34 @@
       link.setAttribute("download", filename);
       link.click();
     }
-	
-	//generate data
-  const NUM_DATAPOINTS = 6;
   
   function getRandomInt(max) {
 	return Math.floor(Math.random() * Math.floor(max));
   }
   
-  var datapoints = [];
-  var indexes = [];
   
-  for (i = 0; i < NUM_DATAPOINTS; i++){
-	datapoints.push(getRandomInt(100) + 1);
+  function generateData(){ 
+    var datapoints = [];
+	for (i = 0; i < NUM_DATAPOINTS; i++){
+		datapoints.push(getRandomInt(100) + 1);
+	}
+	return datapoints;
   }
   
-  for (i = 0; i < 2; i++) {
-    indexes.push(getRandomInt(6));
+  function generateIndexes()
+	var indexes = [];
+	for (i = 0; i < 2; i++) {
+		indexes.push(getRandomInt(6));
+	}
+	return indexes;
   }
   
-  var ratio;
-  if (datapoints[indexes[0]] > datapoints[indexes[1]]){
-	ratio = (datapoints[indexes[1]] / datapoints[indexes[0]]) * 100;
-   } else ratio = (datapoints[indexes[0]] / datapoints[indexes[1]]) * 100;
-
+  function generateRatio(datapoints, indexes)
+    var ratio;
+	if (datapoints[indexes[0]] > datapoints[indexes[1]]){
+		ratio = (datapoints[indexes[1]] / datapoints[indexes[0]]) * 100;
+	} else ratio = (datapoints[indexes[0]] / datapoints[indexes[1]]) * 100;
+    return ratio;
+  }
   </script>
 </html>
