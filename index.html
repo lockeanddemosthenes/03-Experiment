@@ -88,8 +88,10 @@
   <!-- State thing script -->
   <script>
     //Setup that JS global state machine
-    sessionStorage.setItem("PAGE", "TITLE");
-    console.log(sessionStorage.getItem("PAGE"));
+    sessionStorage.setItem("PAGE", "BUBBLE");
+
+    // Call the initial handle
+    handlePage();
 
     function guessStore(guess, actual) {
       theGuess = [guess, actual];
@@ -97,12 +99,14 @@
       sessionStorage.setItem("guess", theGuess);
     }
 
+    // Set the page to PAGE input, in string, and call handlePage
     function setPage(PAGE) {
       sessionStorage.setItem("PAGE", PAGE);
       console.log("Set to " + PAGE);
       handlePage();
     }
 
+    // Check the current set page, and if it is know set the div to that page
     function handlePage() {
       switch (sessionStorage.getItem("PAGE")) {
         case "BUBBLE":
@@ -118,10 +122,11 @@
             "<object type='text/html' id='object-design' data ='sankey.html'></object>";
           break;
         default:
-          console.log("default handle");
+          console.log("Default handle, no predefined page");
       }
     }
 
+    // Sample guess storage and attempts
     guessStore(42, 50);
     console.log(sessionStorage.getItem("guess"));
   </script>
