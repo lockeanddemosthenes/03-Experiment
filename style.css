@@ -9,3 +9,9 @@ body {
 h1 {
     color: navy;
 }
+
+input[type=submit] {
+    padding: 10px 20px 10px 20px;
+    background-color: #47d1ed;
+    border-radius: 5px;
+}
