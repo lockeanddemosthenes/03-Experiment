@@ -6,6 +6,7 @@
   </head>
 
   <body>
+    <div id="chart"></div>
     <h1>Experiment</h1>
     <div id="button">
       <!-- SO 47078563 -->
@@ -79,7 +80,19 @@
       if (datapoints[indexes[0]] > datapoints[indexes[1]]) {
         ratio = (datapoints[indexes[1]] / datapoints[indexes[0]]) * 100;
       } else ratio = (datapoints[indexes[0]] / datapoints[indexes[1]]) * 100;
+      sessionStorage.setItem("someRatio", ratio);
       return ratio;
     }
+
+    function guessStore(guess, actual) {
+      theGuess = [guess, actual];
+      console.log("Stored guess: " + guess + ", actual: " + actual);
+      sessionStorage.setItem("guess", theGuess);
+    }
+
+    document.getElementById("chart").innerHTML =
+      "<object type='text/html' id='object-design' data ='bubbles.html'></object>";
+    guessStore(42, 50);
+    console.log(sessionStorage.getItem("guess"));
   </script>
 </html>
