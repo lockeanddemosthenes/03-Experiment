@@ -26,8 +26,8 @@
   //magic numbers? no
   const NORMAL_OPACITY = 0.2;
   const HIGHLIGHT_OPACITY = 0.5;
-  const NODE_WIDTH = 36;
-  const NODE_PADDING = 40;
+  const NODE_WIDTH = 18;
+  const NODE_PADDING = 20;
 
   //generate data
   const NUM_DATAPOINTS = 6;
@@ -40,7 +40,7 @@
   var indexes;
 
   // Read them in
-  datapoints = JSON.parse(sessionStorage.getItem("DATA")); 
+  datapoints = JSON.parse(sessionStorage.getItem("DATA"));
   indexes = JSON.parse(sessionStorage.getItem("INDICIES"));
   console.log(datapoints);
   console.log(indexes);
@@ -52,8 +52,8 @@
 
   // set the dimensions and margins of the graph
   var margin = { top: 10, right: 10, bottom: 10, left: 10 },
-    width = 500 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+    width = 350 - margin.left - margin.right,
+    height = 350 - margin.top - margin.bottom;
 
   // Map the data
   var someData = d3.range(datapoints.length).map((i) => ({
@@ -139,6 +139,6 @@
     })
     .attr("width", sankey.nodeWidth());
 
-  d3.select(self.frameElement).style("height", 600 + "px");
-  d3.select(self.frameElement).style("width", 550 + "px");
+  d3.select(self.frameElement).style("height", 400 + "px");
+  d3.select(self.frameElement).style("width", 400 + "px");
 </script>
