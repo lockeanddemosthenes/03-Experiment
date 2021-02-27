@@ -40,7 +40,7 @@
   var indexes;
 
   // Read them in
-  datapoints = JSON.parse(sessionStorage.getItem("DATA")); 
+  datapoints = JSON.parse(sessionStorage.getItem("DATA"));
   indexes = JSON.parse(sessionStorage.getItem("INDICIES"));
   console.log(datapoints);
   console.log(indexes);
@@ -139,6 +139,6 @@
     })
     .attr("width", sankey.nodeWidth());
 
-  d3.select(self.frameElement).style("height", 600 + "px");
-  d3.select(self.frameElement).style("width", 550 + "px");
+  d3.select(self.frameElement).style("height", 400 + "px");
+  d3.select(self.frameElement).style("width", 400 + "px");
 </script>
