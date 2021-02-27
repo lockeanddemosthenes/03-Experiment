@@ -34,14 +34,14 @@
       guess = document.getElementById("box").value;
       guessList.push(guess); // add guess  to list
       document.getElementById("box").value = ""; //clear the input box
-      sessionStorage.setItem("guessList", guessList);
-      console.log(sessionStorage.getItem("guessList")); // console log sanity
+      sessionStorage.setItem("guessList", JSON.stringify(guessList));
+      console.log(JSON.parse(sessionStorage.getItem("guessList"))); // console log sanity
       return false; // dont reload form
     }
 
     // Download the CSV file
     function download_csv() {
-      var csv = Array.prototype.join.call(guessList, ",\n");
+      var csv = Array.prototype.join.call(JSON.parse(sessionStorage.getItem("guessList")), ",\n");
 
       filename = "guesses.csv";
 
