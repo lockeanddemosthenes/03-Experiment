@@ -10,7 +10,7 @@
     <h1>Experiment</h1>
     <div id="button">
       <!-- SO 47078563 -->
-      <form onsubmit="return submitGuess()">
+      <form onsubmit="return handleGuess()">
         <!-- Form to submit guess -->
         <p>What percent of the larger is the smaller?</p>
 
@@ -27,6 +27,10 @@
     //magic numbers begone
     const NUM_DATAPOINTS = 6;
 
+    // Initial Data
+    sessionStorage.setItem("DATA", JSON.stringify(generateData()));
+    sessionStorage.setItem("INDICIES", JSON.stringify(generateIndexes()));
+
     var guessList = []; // The list of user guess
 
     // Submit guess function, add guess to list
@@ -39,9 +43,24 @@
       return false; // dont reload form
     }
 
+    // Handle the guess button
+    function handleGuess() {
+      // Submit the guess
+      submitGuess();
+
+      // Get new data
+
+      sessionStorage.setItem("DATA", JSON.stringify(generateData()));
+
+      return false;
+    }
+
     // Download the CSV file
     function download_csv() {
-      var csv = Array.prototype.join.call(JSON.parse(sessionStorage.getItem("guessList")), ",\n");
+      var csv = Array.prototype.join.call(
+        JSON.parse(sessionStorage.getItem("guessList")),
+        ",\n"
+      );
 
       filename = "guesses.csv";
 

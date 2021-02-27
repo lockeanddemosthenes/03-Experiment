@@ -21,8 +21,11 @@
       // Setup real
       var passedIndicies;
       var passedVal;
-      passedVal = sampleVal; // TODO Replace these dummies
-      passedIndicies = sampleIndi; // TODO Replace these dummies
+      // passedVal = sampleVal; // TODO Replace these dummies
+      // passedIndicies = sampleIndi; // TODO Replace these dummies
+
+      passedVal = JSON.parse(sessionStorage.getItem("DATA")); // TODO Replace these dummies
+      passedIndicies = JSON.parse(sessionStorage.getItem("INDICIES")); // TODO Replace these dummies
 
       // Map the data
       var someData = d3.range(passedVal.length).map((i) => ({
