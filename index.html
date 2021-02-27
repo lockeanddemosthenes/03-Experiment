@@ -71,8 +71,7 @@
     function handleSwaparoo() {
       console.log(trialNumber);
       if (trialNumber == 0) {
-        // TODO TITLE
-        setPage("BAR"); // REMOVE
+        setPage("TITLE");
       } else if (trialNumber < TRIAL_NUM) {
         setPage("BAR");
         console.log("Bar graph selected");
@@ -82,7 +81,7 @@
         setPage("BUBBLE");
       } else if (trialNumber >= 3 * TRIAL_NUM) {
         // NOW DOWNLOAD IT
-        setPage("BUBBLE"); // REMOVE
+        setPage("FINISHED");
       } else {
         console.log("nothing man");
       }
@@ -162,7 +161,7 @@
   <!-- State thing script -->
   <script>
     //Setup that JS global state machine
-    sessionStorage.setItem("PAGE", "BAR");
+    sessionStorage.setItem("PAGE", "TITLE");
 
     // Call the initial handle
     handlePage();
@@ -183,6 +182,10 @@
     // Check the current set page, and if it is know set the div to that page
     function handlePage() {
       switch (sessionStorage.getItem("PAGE")) {
+        case "TITLE":
+          document.getElementById("chart").innerHTML =
+            "<object type='text/html' id='object-design' data ='title.html'></object>";
+          break;
         case "BUBBLE":
           document.getElementById("chart").innerHTML =
             "<object type='text/html' id='object-design' data ='bubbles.html'></object>";
@@ -194,6 +197,10 @@
         case "SANKEY":
           document.getElementById("chart").innerHTML =
             "<object type='text/html' id='object-design' data ='sankey.html'></object>";
+          break;
+        case "FINISHED":
+          document.getElementById("chart").innerHTML =
+            "<object type='text/html' id='object-design' data ='finished.html'></object>";
           break;
         default:
           console.log("Default handle, no predefined page");
