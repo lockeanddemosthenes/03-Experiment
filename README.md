@@ -22,4 +22,6 @@ Our confidence intervals are shown below.
 
 ![CIs](img/intervals.png)
 
+![CI graph](img/graph.png)
+
 ```
