@@ -49,8 +49,8 @@
       submitGuess();
 
       // Get new data
-
       sessionStorage.setItem("DATA", JSON.stringify(generateData()));
+      sessionStorage.setItem("INDICIES", JSON.stringify(generateIndexes()));
 
       return false;
     }
