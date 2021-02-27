@@ -24,6 +24,19 @@ Our confidence intervals are shown below.
 
 ![CI graph](img/graph.png)
 
+Tech Achievements
+---
+
+For this project we used HTML elements to swap in the correct graph type that we desired for the testing. For passing the data we are using session storage in the browser, so that the data can all be managed by the central index.
+
+For the graphs, all data is randomly generated for every trial and stored in a CSV download for the participant to send to us.
+
+Design Achievements
+---
+
+The Sankey graph proved very difficult to work with, but we believe that it is presented in a proper and understandable manner.
+
+
 References
 ---
 
