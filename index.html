@@ -6,7 +6,6 @@
   </head>
 
   <body>
-    <div id="chart"></div>
     <h1>Experiment</h1>
     <div id="button">
       <!-- SO 47078563 -->
@@ -19,6 +18,7 @@
         <button onclick="download_csv()">Download CSV</button>
       </form>
     </div>
+    <div id="chart"></div>
   </body>
 
   <script>
@@ -26,12 +26,14 @@
 
     //magic numbers begone
     const NUM_DATAPOINTS = 6;
+    const TRIAL_NUM = 20;
 
     // Initial Data
     newData();
 
     var guessList = []; // The list of user guess
     var ratioList = []; // List of correct ratios
+    var trialNumber = 0;
 
     // Submit guess function, add guess to list
     function submitGuess() {
@@ -54,11 +56,35 @@
       // Submit the guess
       submitGuess();
       logRatio();
+
+      // Increment trial
+      trialNumber++;
+      handleSwaparoo();
+
       // Get new data
       newData();
       handlePage();
 
       return false;
+    }
+
+    function handleSwaparoo() {
+      console.log(trialNumber);
+      if (trialNumber == 0) {
+        setPage("TITLE");
+      } else if (trialNumber < TRIAL_NUM) {
+        setPage("BAR");
+        console.log("Bar graph selected");
+      } else if (TRIAL_NUM < trialNumber && trialNumber < 2 * TRIAL_NUM) {
+        setPage("SANKEY");
+      } else if (2 * TRIAL_NUM < trialNumber && trialNumber < 3 * TRIAL_NUM) {
+        setPage("BUBBLE");
+      } else if (trialNumber >= 3 * TRIAL_NUM) {
+        // NOW DOWNLOAD IT
+        setPage("FINISHED");
+      } else {
+        console.log("nothing man");
+      }
     }
 
     // Generate and set all the new data bois
@@ -73,7 +99,11 @@
       // Souce - https://code-maven.com/create-and-download-csv-with-javascript
       var csvlist = [];
       for (i = 0; i < guessList.length; i++) {
-        csvlist.push([guessList[i], ratioList[i]]);
+        csvlist.push([
+          guessList[i],
+          ratioList[i],
+          sessionStorage.getItem("PAGE"),
+        ]);
       }
 
       var csv = Array.prototype.join.call(csvlist, ",\n");
@@ -131,7 +161,7 @@
   <!-- State thing script -->
   <script>
     //Setup that JS global state machine
-    sessionStorage.setItem("PAGE", "BAR");
+    sessionStorage.setItem("PAGE", "TITLE");
 
     // Call the initial handle
     handlePage();
@@ -152,6 +182,10 @@
     // Check the current set page, and if it is know set the div to that page
     function handlePage() {
       switch (sessionStorage.getItem("PAGE")) {
+        case "TITLE":
+          document.getElementById("chart").innerHTML =
+            "<object type='text/html' id='object-design' data ='title.html'></object>";
+          break;
         case "BUBBLE":
           document.getElementById("chart").innerHTML =
             "<object type='text/html' id='object-design' data ='bubbles.html'></object>";
@@ -163,6 +197,10 @@
         case "SANKEY":
           document.getElementById("chart").innerHTML =
             "<object type='text/html' id='object-design' data ='sankey.html'></object>";
+          break;
+        case "FINISHED":
+          document.getElementById("chart").innerHTML =
+            "<object type='text/html' id='object-design' data ='finished.html'></object>";
           break;
         default:
           console.log("Default handle, no predefined page");
