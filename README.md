@@ -1,6 +1,9 @@
 Description
 ---
 
+Live Link
+https://lockeanddemosthenes.github.io/03-Experiment/
+
 The three charts we decided on were a bar graph, Sankey chart, and bubble (circular area) chart.
 
 ![bar](img/bar.png)
