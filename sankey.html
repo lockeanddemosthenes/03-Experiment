@@ -39,8 +39,9 @@
   var datapoints;
   var indexes;
 
-  datapoints = JSON.parse(sessionStorage.getItem("DATA")); // TODO Replace these dummies
-  indexes = JSON.parse(sessionStorage.getItem("INDICIES")); // TODO Replace these dummies
+  // Read them in
+  datapoints = JSON.parse(sessionStorage.getItem("DATA")); 
+  indexes = JSON.parse(sessionStorage.getItem("INDICIES"));
   console.log(datapoints);
   console.log(indexes);
 

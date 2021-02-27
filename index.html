@@ -28,10 +28,10 @@
     const NUM_DATAPOINTS = 6;
 
     // Initial Data
-    sessionStorage.setItem("DATA", JSON.stringify(generateData()));
-    sessionStorage.setItem("INDICIES", JSON.stringify(generateIndexes()));
+    newData();
 
     var guessList = []; // The list of user guess
+    var ratioList = []; // List of correct ratios
 
     // Submit guess function, add guess to list
     function submitGuess() {
@@ -43,16 +43,28 @@
       return false; // dont reload form
     }
 
+    function logRatio() {
+      ratioList.push(JSON.parse(sessionStorage.getItem("RATIO")));
+      sessionStorage.setItem("ratioList", JSON.stringify(ratioList));
+      console.log(JSON.parse(sessionStorage.getItem("ratioList"))); // console log sanity
+    }
+
     // Handle the guess button
     function handleGuess() {
       // Submit the guess
       submitGuess();
-
+      logRatio();
       // Get new data
-      sessionStorage.setItem("DATA", JSON.stringify(generateData()));
-      sessionStorage.setItem("INDICIES", JSON.stringify(generateIndexes()));
+      newData();
 
       return false;
+    }
+
+    // Generate and set all the new data bois
+    function newData() {
+      sessionStorage.setItem("DATA", JSON.stringify(generateData()));
+      sessionStorage.setItem("INDICIES", JSON.stringify(generateIndexes()));
+      sessionStorage.setItem("RATIO", JSON.stringify(generateRatio()));
     }
 
     // Download the CSV file
@@ -100,12 +112,14 @@
       return indexes;
     }
 
-    function generateRatio(datapoints, indexes) {
+    function generateRatio() {
       var ratio;
+      datapoints = JSON.parse(sessionStorage.getItem("DATA")); // TODO Replace these dummies
+      indexes = JSON.parse(sessionStorage.getItem("INDICIES")); // TODO Replace these dummies
       if (datapoints[indexes[0]] > datapoints[indexes[1]]) {
         ratio = (datapoints[indexes[1]] / datapoints[indexes[0]]) * 100;
       } else ratio = (datapoints[indexes[0]] / datapoints[indexes[1]]) * 100;
-      sessionStorage.setItem("someRatio", ratio);
+      sessionStorage.setItem("RATIO", ratio);
       return ratio;
     }
   </script>
