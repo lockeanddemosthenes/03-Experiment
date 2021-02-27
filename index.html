@@ -26,12 +26,14 @@
 
     //magic numbers begone
     const NUM_DATAPOINTS = 6;
+    const TRIAL_NUM = 5;
 
     // Initial Data
     newData();
 
     var guessList = []; // The list of user guess
     var ratioList = []; // List of correct ratios
+    var trialNumber = 0;
 
     // Submit guess function, add guess to list
     function submitGuess() {
@@ -54,11 +56,36 @@
       // Submit the guess
       submitGuess();
       logRatio();
+
+      // Increment trial
+      trialNumber++;
+      handleSwaparoo();
+
       // Get new data
       newData();
       handlePage();
 
       return false;
+    }
+
+    function handleSwaparoo() {
+      console.log(trialNumber);
+      if (trialNumber == 0) {
+        // TODO TITLE
+        setPage("BAR"); // REMOVE
+      } else if (trialNumber < TRIAL_NUM) {
+        setPage("BAR");
+        console.log("Bar graph selected");
+      } else if (TRIAL_NUM < trialNumber && trialNumber < 2 * TRIAL_NUM) {
+        setPage("SANKEY");
+      } else if (2 * TRIAL_NUM < trialNumber && trialNumber < 3 * TRIAL_NUM) {
+        setPage("BUBBLE");
+      } else if (trialNumber >= 3 * TRIAL_NUM) {
+        // NOW DOWNLOAD IT
+        setPage("BUBBLE"); // REMOVE
+      } else {
+        console.log("nothing man");
+      }
     }
 
     // Generate and set all the new data bois
