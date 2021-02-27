@@ -87,10 +87,15 @@
       return datapoints;
     }
 
+    // Generate indecies while avoiding duplicates
     function generateIndexes() {
       var indexes = [];
-      for (i = 0; i < 2; i++) {
-        indexes.push(getRandomInt(6));
+      var chosenInt;
+      while (indexes.length < 2) {
+        chosenInt = getRandomInt(6);
+        if (!indexes.includes(chosenInt)) {
+          indexes.push(chosenInt);
+        }
       }
       return indexes;
     }
@@ -108,7 +113,7 @@
   <!-- State thing script -->
   <script>
     //Setup that JS global state machine
-    sessionStorage.setItem("PAGE", "BUBBLE");
+    sessionStorage.setItem("PAGE", "SANKEY");
 
     // Call the initial handle
     handlePage();
