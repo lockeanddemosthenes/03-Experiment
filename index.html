@@ -100,7 +100,11 @@
       // Souce - https://code-maven.com/create-and-download-csv-with-javascript
       var csvlist = [];
       for (i = 0; i < guessList.length; i++) {
-        csvlist.push([guessList[i], ratioList[i]]);
+        csvlist.push([
+          guessList[i],
+          ratioList[i],
+          sessionStorage.getItem("PAGE"),
+        ]);
       }
 
       var csv = Array.prototype.join.call(csvlist, ",\n");
