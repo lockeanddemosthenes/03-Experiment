@@ -23,10 +23,6 @@
 </style>
 
 <script>
-  //Sample input
-  sampleVal = [30, 100, 50, 17, 59, 92];
-  sampleIndi = [0, 4];
-
   //magic numbers? no
   const NORMAL_OPACITY = 0.2;
   const HIGHLIGHT_OPACITY = 0.5;
@@ -40,16 +36,14 @@
     return Math.floor(Math.random() * Math.floor(max));
   }
 
-  var datapoints = [];
-  var indexes = [];
+  var datapoints;
+  var indexes;
 
-  for (i = 0; i < NUM_DATAPOINTS; i++) {
-    datapoints.push(getRandomInt(100) + 1);
-  }
-
-  for (i = 0; i < 2; i++) {
-    indexes.push(getRandomInt(6));
-  }
+  // Read them in
+  datapoints = JSON.parse(sessionStorage.getItem("DATA")); 
+  indexes = JSON.parse(sessionStorage.getItem("INDICIES"));
+  console.log(datapoints);
+  console.log(indexes);
 
   var ratio;
   if (datapoints[indexes[0]] > datapoints[indexes[1]]) {
@@ -62,11 +56,11 @@
     height = 500 - margin.top - margin.bottom;
 
   // Map the data
-  var someData = d3.range(sampleVal.length).map((i) => ({
+  var someData = d3.range(datapoints.length).map((i) => ({
     source: 0,
     target: i + 1, // THE INDEX --- THE INNNNDEEEXXXX
-    value: sampleVal[i], // The actual value
-    selected: sampleIndi.includes(i), // Is this index a good index?
+    value: datapoints[i], // The actual value
+    selected: indexes.includes(i), // Is this index a good index?
   }));
 
   // append the svg object to the body of the page
@@ -144,4 +138,7 @@
       return d.dy;
     })
     .attr("width", sankey.nodeWidth());
+
+  d3.select(self.frameElement).style("height", 600 + "px");
+  d3.select(self.frameElement).style("width", 550 + "px");
 </script>
