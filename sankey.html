@@ -45,8 +45,8 @@
 
   datapoints = JSON.parse(sessionStorage.getItem("DATA")); // TODO Replace these dummies
   indexes = JSON.parse(sessionStorage.getItem("INDICIES")); // TODO Replace these dummies
-  console.log(datapoints)
-  console.log(indexes)
+  console.log(datapoints);
+  console.log(indexes);
 
   // for (i = 0; i < NUM_DATAPOINTS; i++) {
   //   datapoints.push(getRandomInt(100) + 1);
@@ -67,11 +67,11 @@
     height = 500 - margin.top - margin.bottom;
 
   // Map the data
-  var someData = d3.range(sampleVal.length).map((i) => ({
+  var someData = d3.range(datapoints.length).map((i) => ({
     source: 0,
     target: i + 1, // THE INDEX --- THE INNNNDEEEXXXX
-    value: sampleVal[i], // The actual value
-    selected: sampleIndi.includes(i), // Is this index a good index?
+    value: datapoints[i], // The actual value
+    selected: indexes.includes(i), // Is this index a good index?
   }));
 
   // append the svg object to the body of the page
@@ -149,4 +149,7 @@
       return d.dy;
     })
     .attr("width", sankey.nodeWidth());
+
+  d3.select(self.frameElement).style("height", 600 + "px");
+  d3.select(self.frameElement).style("width", 550 + "px");
 </script>
