@@ -69,10 +69,16 @@
 
     // Download the CSV file
     function download_csv() {
-      var csv = Array.prototype.join.call(
-        JSON.parse(sessionStorage.getItem("guessList")),
-        ",\n"
-      );
+      // Souce - https://code-maven.com/create-and-download-csv-with-javascript
+      var csvlist = [];
+      console.log({ guessList });
+      console.log(guessList);
+      for (i = 0; i < guessList.length; i++) {
+        csvlist.push([guessList[i], ratioList[i]]);
+        console.log(csvlist);
+      }
+
+      var csv = Array.prototype.join.call(csvlist, ",\n");
 
       filename = "guesses.csv";
 
