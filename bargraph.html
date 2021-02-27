@@ -1,76 +1,104 @@
 <html>
-<head>
+  <head>
     <script src="https://d3js.org/d3.v4.min.js"></script>
-</head>
+  </head>
 
-<div id="vis"></div>
+  <div id="vis"></div>
 
-<body></body>
+  <body></body>
 
-<script>
+  <script>
     // Grid dimensions
-    var margin = {top: 20, right: 20, bottom: 20, left: 20}
-    var width = 600 - margin.right - margin.left
-    var height = 600 - margin.top - margin.bottom
+    var margin = { top: 20, right: 20, bottom: 20, left: 20 };
+    var width = 300 - margin.right - margin.left;
+    var height = 300 - margin.top - margin.bottom;
 
     // Generate SVG
-    var svg = d3.select("#vis")
-    .append('svg')
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    var svg = d3
+      .select("#vis")
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     // TODO: Remove this data when actual database exists
-    dummyData = [ ['a', 13], ['b', 50], ['c', 42], ['d', 27], ['e', 25], ['f', 69] ]
-    dummyDataSelections = ['b', 'c']
+    dummyData = [
+      ["a", 13],
+      ["b", 50],
+      ["c", 42],
+      ["d", 27],
+      ["e", 25],
+      ["f", 69],
+    ];
+    dummyDataSelections = ["b", "c"];
 
     // Create grid
-    svg.append("rect")
-    .attr("width", width)
-    .attr("height", height)
-    .attr("fill", "none")
+    svg
+      .append("rect")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("fill", "none");
 
     // Draw x axis
-    var x = d3.scaleBand()
-    .domain(dummyData.map(function(d) {return d[0]}) )
-    .range([0, width])
-    .padding(0.2)
-    svg.append("g")
-    .attr("transform", "translate(0, "+ height + ")")
-    .call(d3.axisBottom(x).tickFormat("").tickSize(0))
-    .style("stroke-width", "2px")
+    var x = d3
+      .scaleBand()
+      .domain(
+        dummyData.map(function (d) {
+          return d[0];
+        })
+      )
+      .range([0, width])
+      .padding(0.2);
+    svg
+      .append("g")
+      .attr("transform", "translate(0, " + height + ")")
+      .call(d3.axisBottom(x).tickFormat("").tickSize(0))
+      .style("stroke-width", "2px");
 
     // Draw y axis
-    var y = d3.scaleLinear().domain([0, 100]).range([height, 0])
-    svg.append("g")
-    .call(d3.axisLeft(y).tickFormat("").tickSize(0))
-    .style("stroke-width", "2px")
+    var y = d3.scaleLinear().domain([0, 100]).range([height, 0]);
+    svg
+      .append("g")
+      .call(d3.axisLeft(y).tickFormat("").tickSize(0))
+      .style("stroke-width", "2px");
 
     // Draw bars
-    svg.selectAll("bar")
-    .data(dummyData)
-    .enter()
-    .append("g")
-    .attr("id", function(d) { return d[0] })
-    .append('rect')
-    .style("fill", "none")
-    .style("stroke", "#000000")
-    .attr("x", function(d) { return x(d[0]) })
-    .attr("y", function(d) { return y(d[1]) })
-    .attr("width", x.bandwidth())
-    .attr("height", function(d) { return height - y(d[1]) })
+    svg
+      .selectAll("bar")
+      .data(dummyData)
+      .enter()
+      .append("g")
+      .attr("id", function (d) {
+        return d[0];
+      })
+      .append("rect")
+      .style("fill", "none")
+      .style("stroke", "#000000")
+      .attr("x", function (d) {
+        return x(d[0]);
+      })
+      .attr("y", function (d) {
+        return y(d[1]);
+      })
+      .attr("width", x.bandwidth())
+      .attr("height", function (d) {
+        return height - y(d[1]);
+      });
 
     // Dots on the chosen ones
-    dummyDataSelections.forEach(id => {
-        var selectedBar = d3.select('#' + id)
-        selectedBar.append("circle")
-        .attr("cx", function(d) { return x(d[0]) + x.bandwidth()/2 })
-        .attr("cy", width - margin.bottom*2)
+    dummyDataSelections.forEach((id) => {
+      var selectedBar = d3.select("#" + id);
+      selectedBar
+        .append("circle")
+        .attr("cx", function (d) {
+          return x(d[0]) + x.bandwidth() / 2;
+        })
+        .attr("cy", width - margin.bottom * 2)
         .attr("r", 5)
-        .style("fill", "#000000")
-    })
-
-</script>
-
+        .style("fill", "#000000");
+    });
+    d3.select(self.frameElement).style("height", 400 + "px");
+    d3.select(self.frameElement).style("width", 400 + "px");
+  </script>
 </html>
