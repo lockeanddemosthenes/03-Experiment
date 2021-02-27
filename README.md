@@ -24,4 +24,10 @@ Our confidence intervals are shown below.
 
 ![CI graph](img/graph.png)
 
+References
+---
+
+Sankey chart code was referenced from https://bl.ocks.org/vasturiano/b0b14f2e58fdeb0da61e62d51c649908.
+CSV download code was reference from https://code-maven.com/create-and-download-csv-with-javascript.
+
 ```
