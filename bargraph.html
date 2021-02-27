@@ -69,11 +69,9 @@
       .enter()
       .append("g")
       .attr("id", function (d) {
-        console.log(d);
         return d.selected ? "chosen" : "nosen";
       })
       .style("selected", function (d) {
-        console.log(d);
         return d.selected;
       })
       .append("rect")

@@ -22,7 +22,7 @@
   </body>
 
   <script>
-    console.log(d3); // test if d3 is loaded
+    console.log({ d3 }); // test if d3 is loaded
 
     //magic numbers begone
     const NUM_DATAPOINTS = 6;
@@ -56,6 +56,7 @@
       logRatio();
       // Get new data
       newData();
+      handlePage();
 
       return false;
     }
@@ -167,9 +168,5 @@
           console.log("Default handle, no predefined page");
       }
     }
-
-    // Sample guess storage and attempts
-    guessStore(42, 50);
-    console.log(sessionStorage.getItem("guess"));
   </script>
 </html>
