@@ -31,7 +31,17 @@
       ["e", 25],
       ["f", 69],
     ];
-    dummyDataSelections = ["b", "c"];
+    dummyDataSelections = ["a", "c"];
+
+    var alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l"];
+    datapoints = [30, 100, 50, 17, 59, 92];
+    indexes = [1, 3];
+
+    var someData = d3.range(datapoints.length).map((i) => ({
+      index: alphabet[i],
+      value: datapoints[i], // The actual value
+      selected: indexes.includes(i), // Is this index a good index?
+    }));
 
     // Create grid
     svg
@@ -44,8 +54,8 @@
     var x = d3
       .scaleBand()
       .domain(
-        dummyData.map(function (d) {
-          return d[0];
+        someData.map(function (d) {
+          return d.index;
         })
       )
       .range([0, width])
@@ -66,24 +76,25 @@
     // Draw bars
     svg
       .selectAll("bar")
-      .data(dummyData)
+      .data(someData)
       .enter()
       .append("g")
       .attr("id", function (d) {
-        return d[0];
+        console.log(d);
+        return d.index;
       })
       .append("rect")
       .style("fill", "none")
       .style("stroke", "#000000")
       .attr("x", function (d) {
-        return x(d[0]);
+        return x(d.index);
       })
       .attr("y", function (d) {
-        return y(d[1]);
+        return y(d.value);
       })
       .attr("width", x.bandwidth())
       .attr("height", function (d) {
-        return height - y(d[1]);
+        return height - y(d.value);
       });
 
     // Dots on the chosen ones
@@ -92,7 +103,7 @@
       selectedBar
         .append("circle")
         .attr("cx", function (d) {
-          return x(d[0]) + x.bandwidth() / 2;
+          return x(d.index) + x.bandwidth() / 2;
         })
         .attr("cy", width - margin.bottom * 2)
         .attr("r", 5)
