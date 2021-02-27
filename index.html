@@ -33,6 +33,7 @@
 
     var guessList = []; // The list of user guess
     var ratioList = []; // List of correct ratios
+    var typeList = [];
     var trialNumber = 0;
 
     // Submit guess function, add guess to list
@@ -51,11 +52,19 @@
       console.log(JSON.parse(sessionStorage.getItem("ratioList"))); // console log sanity
     }
 
+    function logType(){
+      typeList.push(JSON.parse(sessionStorage.getItem("TYPE")));
+      sessionStorage.setItem("typeList", JSON.stringify(typeList));
+      console.log(JSON.parse(sessionStorage.getItem("typeList"))); // console log sanity
+
+    }
+
     // Handle the guess button
     function handleGuess() {
       // Submit the guess
       submitGuess();
       logRatio();
+      logType();
 
       // Increment trial
       trialNumber++;
@@ -102,7 +111,7 @@
         csvlist.push([
           guessList[i],
           ratioList[i],
-          sessionStorage.getItem("PAGE"),
+          typeList[i],
         ]);
       }
 
@@ -175,7 +184,7 @@
     // Set the page to PAGE input, in string, and call handlePage
     function setPage(PAGE) {
       sessionStorage.setItem("PAGE", PAGE);
-      console.log("Set to " + PAGE);
+      console.log("Set to " + sessionStorage.getItem("PAGE"));
       handlePage();
     }
 
