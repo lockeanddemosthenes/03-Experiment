@@ -22,12 +22,9 @@
       .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-    // TODO: Remove this data when actual database exists
-    datapoints = [30, 100, 50, 17, 59, 92];
-    indexes = [2, 4];
-
-    datapoints = JSON.parse(sessionStorage.getItem("DATA")); 
-  indexes = JSON.parse(sessionStorage.getItem("INDICIES"));
+    // Read in data
+    datapoints = JSON.parse(sessionStorage.getItem("DATA"));
+    indexes = JSON.parse(sessionStorage.getItem("INDICIES"));
 
     var someData = d3.range(datapoints.length).map((i) => ({
       index: i,
